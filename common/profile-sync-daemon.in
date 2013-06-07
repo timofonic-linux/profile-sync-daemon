@@ -34,6 +34,7 @@ ALL_BROWSERS=(
 	firefox-trunk
 	google-chrome
 	heftig-aurora
+	icedove
 	midori
 	opera
 	opera-next
@@ -90,6 +91,9 @@ dep_check() {
 				return
 				;;
 			heftig-aurora)
+				return
+				;;
+			icedove)
 				return
 				;;
 			midori)
@@ -243,6 +247,24 @@ set_which() {
 				done
 			fi
 			;;
+		icedove)
+			if [[ -d $homedir/.icedove ]]; then
+				profileArr=( $(grep '[P,p]'ath= $homedir/.icedove/profiles.ini |
+					sed 's/[P,p]ath=//') )
+				index=0
+				PSNAME="$browser-bin"
+				for profileItem in ${profileArr[@]}; do
+					if [[ $(echo $profileItem | cut -c1) = "/" ]]; then
+						DIRArr[index]="$profileItem"	# path is not relative
+					else
+						# we need to append the default path to give a fully
+						# qualified path
+						DIRArr[index]="$homedir/.icedove/$profileItem"
+					fi
+					index=$index+1
+				done
+			fi		
+			;;
 		seamonkey)
 			if [[ -d $homedir/.mozilla/seamonkey ]]; then
 				profileArr=( $(grep '[P,p]'ath= $homedir/.mozilla/seamonkey/profiles.ini |
@@ -298,6 +320,7 @@ dup_check() {
 			if [[ "$browser" = "firefox" ]] ||
 				[[ "$browser" = "firefox-trunk" ]] ||
 				[[ "$browser" = "heftig-aurora" ]] ||
+				[[ "$browser" = "icedove" ]] ||
 				[[ "$browser" = "seamonkey" ]]
 			then
 				if [[ -z ${DIRArr[@]} ]]; then
@@ -372,6 +395,7 @@ parse_conf_file() {
 				[[ "$browser" = "firefox" ]] ||
 					[[ "$browser" = "firefox-trunk" ]] ||
 					[[ "$browser" = "heftig-aurora" ]] ||
+					[[ "$browser" = "icedove" ]] ||
 					[[ "$browser" = "seamonkey" ]] &&
 					suffix="-${item##*/}" ||
 					suffix=
@@ -412,6 +436,7 @@ ungraceful_state_check() {
 				[[ "$browser" = "firefox" ]] ||
 					[[ "$browser" = "firefox-trunk" ]] ||
 					[[ "$browser" = "heftig-aurora" ]] ||
+					[[ "$browser" = "icedove" ]] ||
 					[[ "$browser" = "seamonkey" ]] &&
 					suffix="-${item##*/}" ||
 					suffix=
@@ -440,6 +465,7 @@ do_sync() {
 				[[ "$browser" = "firefox" ]] ||
 					[[ "$browser" = "firefox-trunk" ]] ||
 					[[ "$browser" = "heftig-aurora" ]] ||
+					[[ "$browser" = "icedove" ]] ||
 					[[ "$browser" = "seamonkey" ]] &&
 					suffix="-${item##*/}" ||
 					suffix=
@@ -484,6 +510,7 @@ do_unsync() {
 				[[ "$browser" = "firefox" ]] ||
 					[[ "$browser" = "firefox-trunk" ]] ||
 					[[ "$browser" = "heftig-aurora" ]] ||
+					[[ "$browser" = "icedove" ]] ||
 					[[ "$browser" = "seamonkey" ]] &&
 					suffix="-${item##*/}" ||
 					suffix=
