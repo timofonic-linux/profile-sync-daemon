@@ -44,6 +44,8 @@ ALL_BROWSERS=(
 	google-chrome-unstable
 	heftig-aurora
 	icecat
+	leechcraft-all
+	leechcraft-poshuku
 	luakit
 	midori
 	opera
@@ -115,6 +117,12 @@ dep_check() {
 				return
 				;;
 			icecat)
+				return
+				;;
+			leechcraft-all)
+				return
+				;;
+			leechcraft-poshuku)
 				return
 				;;
 			midori)
@@ -202,6 +210,14 @@ set_which() {
 		google-chrome|google-chrome-beta|google-chrome-unstable)
 			DIRArr[0]="$homedir/.config/$browser"
 			PSNAME="chrome"
+			;;
+		leechcraft-all)
+			DIRArr[0]="$homedir/.leechcraft"
+			PSNAME="leechcraft"
+			;;
+		leechcraft-poshuku)
+			DIRArr[0]="$homedir/.leechcraft/poshuku"
+			PSNAME="leechcraft"
 			;;
 		opera|opera-next)
 			DIRArr[0]="$homedir/.$browser"
