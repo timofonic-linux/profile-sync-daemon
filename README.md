@@ -19,6 +19,7 @@ Update instructions from version 5.x:
 Note that if you're using overlayfs mode, your user needs to have sudo right to /usr/bin/psd-overlay-helper or else psd will refuse to run in overlayfs mode.
 
 ##Supported Browsers
+* Brave
 * Chromium
 * Conkeror
 * Epiphany
