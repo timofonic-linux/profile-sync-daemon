@@ -23,7 +23,7 @@ Q = @
 
 common/$(PN): common/$(PN).in
 	$(Q)echo -e '\033[1;32mSetting version\033[0m'
-	$(Q)$(SED) 's/@VERSION@/'$(VERSION)'/; s/@SHAREDIR@/'$(SHAREDIR)'/' common/$(PN).in > common/$(PN)
+	$(Q)$(SED) 's/@VERSION@/'$(VERSION)'/; s|@SHAREDIR@|'$(DESTDIR)$(SHAREDIR)'|' common/$(PN).in > common/$(PN)
 
 install-bin: common/$(PN)
 	$(Q)echo -e '\033[1;32mInstalling main script...\033[0m'
