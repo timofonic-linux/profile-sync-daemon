@@ -20,7 +20,7 @@ HOME="$(getent passwd "$user" | cut -d: -f6)"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 PSDCONFDIR="$XDG_CONFIG_HOME/psd"
 PSDCONF="$PSDCONFDIR/psd.conf"
-SHAREDIR="/usr/share/psd"
+SHAREDIR="@SHAREDIR@"
 VOLATILE="$XDG_RUNTIME_DIR"
 PID_FILE="$VOLATILE/psd.pid"
 

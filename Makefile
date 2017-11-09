@@ -23,10 +23,10 @@ Q = @
 
 common/$(PN): common/$(PN).in
 	$(Q)echo -e '\033[1;32mSetting version\033[0m'
-	$(Q)$(SED) 's/@VERSION@/'$(VERSION)'/' common/$(PN).in > common/$(PN)
 
 install-bin: common/$(PN)
 	$(Q)echo -e '\033[1;32mInstalling main script...\033[0m'
+	$(Q)$(SED) 's/@VERSION@/'$(VERSION)'/; s|@SHAREDIR@|'$(DESTDIR)$(SHAREDIR)'|' common/$(PN).in > common/$(PN)
 	$(INSTALL_DIR) "$(DESTDIR)$(BINDIR)"
 	$(INSTALL_PROGRAM) common/$(PN) "$(DESTDIR)$(BINDIR)/$(PN)"
 	$(INSTALL_PROGRAM) common/psd-overlay-helper "$(DESTDIR)$(BINDIR)/psd-overlay-helper"
